@@ -1,28 +1,55 @@
+import 'dotenv/config';
 import express from 'express';
 import pino from 'pino-http';
-// import router from './routers/index.js';
 import cors from 'cors';
-import 'dotenv/config';
+import { Contact } from './models/contact.js';
 
-// export const setupServer = () => {
-const app = express();
+export default function setupServer() {
+  const app = express();
 
-app.use(pino());
+  app.use(pino());
 
-app.use(cors());
+  app.use(cors());
 
-// app.use(router);
+  app.get('/contacts', async (req, res) => {
+    try {
+      const contacts = await Contact.find();
 
-app.get('/', (req, res) => {
-  console.log(undefined.unknown());
-  res.send('Hello, World!');
-});
+      res.send({
+        status: 200,
+        message: 'Successfully found contacts!',
+        contacts,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
-app.use((req, res, next) => {
-  res.status(404).send('Not Found');
-});
+  app.get('/contacts/:contactId', async (req, res) => {
+    try {
+      const { contactId } = req.params;
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
-// };
+      const contact = await Contact.findById(contactId);
+
+      if (contact === null) {
+        return res
+          .status(404)
+          .send({ status: 404, message: 'Contact not found' });
+      }
+
+      res.send({
+        status: 200,
+        message: 'Successfully found contact with id {**contactId**}!',
+        data: contact,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+}
