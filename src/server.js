@@ -25,10 +25,10 @@ export const setupServer = () => {
   );
 
   app.get('/contacts', async (req, res) => {
-    const contact = await getAllContacts();
+    const contacts = await getAllContacts();
     res.status(200).json({
       status: 200,
-      data: contact,
+      data: contacts,
     });
   });
 
