@@ -2,7 +2,7 @@ import {
   getAllContacts,
   getContactById,
   createContact,
-} from './services/contacts.js';
+} from '../services/contacts.js';
 import createHttpError from 'http-errors';
 
 export const getAllContactsController = async (req, res) => {
@@ -38,9 +38,9 @@ export const createContactController = async (req, res, next) => {
     contactType: req.body.contactType,
   };
 
-  const createdContact = await createContact.createContact(contact);
+  const createdNewContact = await createContact(contact);
 
   res
     .status(201)
-    .send({ status: 201, message: 'Contact created', data: createdContact });
+    .send({ status: 201, message: 'Contact created', data: createdNewContact });
 };
