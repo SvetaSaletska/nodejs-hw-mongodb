@@ -4,6 +4,7 @@ import {
   createContact,
   deleteContact,
   updateContact,
+  changeContactName,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
 
@@ -79,4 +80,16 @@ export const updateContactController = async (req, res, next) => {
   res
     .status(200)
     .send({ status: 200, message: 'Contact updated', data: result });
+};
+
+export const changeContactNameController = async (req, res, next) => {
+  const { contactId } = req.params;
+
+  const name = req.body.name;
+
+  const result = await changeContactName(contactId, name);
+
+  console.log({ result });
+
+  res.send('Name');
 };

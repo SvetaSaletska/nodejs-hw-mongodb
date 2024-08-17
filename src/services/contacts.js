@@ -26,3 +26,12 @@ export const updateContact = async (contactId, contact) => {
   });
   return user;
 };
+
+export const changeContactName = async (contactId, name) => {
+  const contact = await contactsCollection.findByIdAndUpdate(
+    contactId,
+    { name: name },
+    { new: true },
+  );
+  return contact;
+};
