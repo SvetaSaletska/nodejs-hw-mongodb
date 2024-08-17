@@ -43,9 +43,11 @@ export const createContactController = async (req, res, next) => {
 
   const createdNewContact = await createContact(contact);
 
-  res
-    .status(201)
-    .send({ status: 201, message: 'Contact created', data: createdNewContact });
+  res.status(201).send({
+    status: 201,
+    message: 'Successfully created a contact!',
+    data: createdNewContact,
+  });
 };
 
 export const deleteContactController = async (req, res, next) => {
@@ -89,7 +91,15 @@ export const changeContactNameController = async (req, res, next) => {
 
   const result = await changeContactName(contactId, name);
 
-  console.log({ result });
+  // console.log({ result });
 
-  res.send('Name');
+  if (result === null) {
+    return next(createHttpError(404, 'Contact not found'));
+  }
+
+  res.status(200).send({
+    status: 200,
+    message: 'Successfully patched a contact!',
+    data: result,
+  });
 };
