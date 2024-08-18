@@ -9,7 +9,7 @@ import {
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { createContactsSchema } from '../validation/contacts.js';
-import { validateBody } from '../middlewares/validateBody,js';
+import { validateBody } from '../middlewares/validateBody.js';
 
 const router = express.Router();
 
