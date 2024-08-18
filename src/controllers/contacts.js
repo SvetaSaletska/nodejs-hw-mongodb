@@ -4,7 +4,6 @@ import {
   createContact,
   deleteContact,
   updateContact,
-  changeContactName,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
 
