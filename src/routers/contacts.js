@@ -5,7 +5,7 @@ import {
   createContactController,
   deleteContactController,
   updateContactController,
-  changeContactNameController,
+  patchContactController,
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -25,7 +25,7 @@ router.put(
 router.patch(
   '/contacts/:contactId',
   jsonParser,
-  ctrlWrapper(changeContactNameController),
+  ctrlWrapper(patchContactController),
 );
 
 export default router;
