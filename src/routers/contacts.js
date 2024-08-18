@@ -23,7 +23,7 @@ router.put(
   ctrlWrapper(updateContactController),
 );
 router.patch(
-  '/contacts/:contactId/name',
+  '/contacts/:contactId',
   jsonParser,
   ctrlWrapper(changeContactNameController),
 );

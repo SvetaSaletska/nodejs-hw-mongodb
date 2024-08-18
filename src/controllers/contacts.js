@@ -87,19 +87,20 @@ export const updateContactController = async (req, res, next) => {
 export const changeContactNameController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const name = req.body.name;
+  // const name = req.body.name;
 
-  const result = await changeContactName(contactId, name);
+  const result = await changeContactName(contactId, req.body);
 
   // console.log({ result });
 
-  if (result === null) {
-    return next(createHttpError(404, 'Contact not found'));
+  if (!result) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
   }
 
   res.status(200).send({
     status: 200,
     message: 'Successfully patched a contact!',
-    data: result,
+    data: result.contact,
   });
 };

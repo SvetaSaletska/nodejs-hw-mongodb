@@ -27,11 +27,9 @@ export const updateContact = async (contactId, contact) => {
   return user;
 };
 
-export const changeContactName = async (contactId, name) => {
-  const contact = await contactsCollection.findByIdAndUpdate(
-    contactId,
-    { name: name },
-    { new: true },
-  );
-  return contact;
+export const changeContactName = async (contactId, contact) => {
+  const user = await contactsCollection.findByIdAndUpdate(contactId, contact, {
+    new: true,
+  });
+  return user;
 };
