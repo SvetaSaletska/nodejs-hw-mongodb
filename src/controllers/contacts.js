@@ -5,7 +5,6 @@ import {
   deleteContact,
   updateContact,
 } from '../services/contacts.js';
-import { createContactsSchema } from '../validation/contacts.js';
 import createHttpError from 'http-errors';
 
 export const getAllContactsController = async (req, res) => {
@@ -40,14 +39,6 @@ export const createContactController = async (req, res, next) => {
     isFavourite: req.body.isFavourite,
     contactType: req.body.contactType,
   };
-
-  const validationResponse = createContactsSchema.validate(contact);
-
-  if (validationResponse.error) {
-    console.error(validationResponse.error.message);
-  } else {
-    console.log('Data is valid!');
-  }
 
   const createdNewContact = await createContact(contact);
 
