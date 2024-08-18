@@ -62,36 +62,53 @@ export const deleteContactController = async (req, res, next) => {
   res.send({ status: 200, message: 'Contact deleted', data: result });
 };
 
+// export const updateContactController = async (req, res, next) => {
+//   const { contactId } = req.params;
+
+//   const contact = {
+//     name: req.body.name,
+//     phoneNumber: req.body.phoneNumber,
+//     email: req.body.email,
+//     isFavourite: req.body.isFavourite,
+//     contactType: req.body.contactType,
+//   };
+
+//   const result = await updateContact(contactId, contact);
+
+//   if (result === null) {
+//     return next(createHttpError(404, 'Contact not found'));
+//   }
+
+//   res
+//     .status(200)
+//     .send({ status: 200, message: 'Contact updated', data: result });
+// };
+
 export const updateContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const contact = {
-    name: req.body.name,
-    phoneNumber: req.body.phoneNumber,
-    email: req.body.email,
-    isFavourite: req.body.isFavourite,
-    contactType: req.body.contactType,
-  };
+  const result = await updateContact(contactId, req.body, {
+    upsert: true,
+  });
 
-  const result = await updateContact(contactId, contact);
-
-  if (result === null) {
-    return next(createHttpError(404, 'Contact not found'));
+  if (!result) {
+    next(createHttpError(404, 'Student not found'));
+    return;
   }
 
-  res
-    .status(200)
-    .send({ status: 200, message: 'Contact updated', data: result });
+  const status = result.isNew ? 201 : 200;
+
+  res.status(status).json({
+    status,
+    message: `Successfully upserted a student!`,
+    data: result.student,
+  });
 };
 
-export const changeContactNameController = async (req, res, next) => {
+export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  // const name = req.body.name;
-
-  const result = await changeContactName(contactId, req.body);
-
-  // console.log({ result });
+  const result = await updateContact(contactId, req.body);
 
   if (!result) {
     next(createHttpError(404, 'Contact not found'));

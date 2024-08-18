@@ -20,16 +20,35 @@ export const deleteContact = async (contactId) => {
   return contact;
 };
 
-export const updateContact = async (contactId, contact) => {
-  const user = await contactsCollection.findByIdAndUpdate(contactId, contact, {
-    new: true,
-  });
-  return user;
-};
+// export const updateContact = async (contactId, contact) => {
+//   const user = await contactsCollection.findByIdAndUpdate(contactId, contact, {
+//     new: true,
+//   });
+//   return user;
+// };
 
-export const changeContactName = async (contactId, contact) => {
-  const user = await contactsCollection.findByIdAndUpdate(contactId, contact, {
-    new: true,
-  });
-  return user;
+// export const changeContactName = async (contactId, contact) => {
+//   const user = await contactsCollection.findByIdAndUpdate(contactId, contact, {
+//     new: true,
+//   });
+//   return user;
+// };
+
+export const updateContact = async (studentId, payload, options = {}) => {
+  const rawResult = await contactsCollection.findOneAndUpdate(
+    { _id: studentId },
+    payload,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
+  );
+
+  if (!rawResult || !rawResult.value) return null;
+
+  return {
+    student: rawResult.value,
+    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+  };
 };
