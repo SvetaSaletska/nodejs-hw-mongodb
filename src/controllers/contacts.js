@@ -43,7 +43,12 @@ export const createContactController = async (req, res, next) => {
 
   const validationResponse = createContactsSchema.validate(contact);
 
-  console.log({ validationResponse });
+  if (validationResponse.error) {
+    console.error(validationResponse.error.message);
+  } else {
+    console.log('Data is valid!');
+  }
+
   const createdNewContact = await createContact(contact);
 
   res.status(201).send({
