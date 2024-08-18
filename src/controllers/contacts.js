@@ -49,17 +49,6 @@ export const createContactController = async (req, res, next) => {
   });
 };
 
-// export const deleteContactController = async (req, res, next) => {
-//   const { contactId } = req.params;
-
-//   const contact = await deleteContact(contactId);
-
-//   if (!contact) {
-//     next(createHttpError(404, 'Contact not found'));
-//     return;
-//   }
-// };
-
 export const deleteContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
@@ -71,28 +60,6 @@ export const deleteContactController = async (req, res, next) => {
 
   res.status(204).send();
 };
-
-// export const updateContactController = async (req, res, next) => {
-//   const { contactId } = req.params;
-
-//   const contact = {
-//     name: req.body.name,
-//     phoneNumber: req.body.phoneNumber,
-//     email: req.body.email,
-//     isFavourite: req.body.isFavourite,
-//     contactType: req.body.contactType,
-//   };
-
-//   const result = await updateContact(contactId, contact);
-
-//   if (result === null) {
-//     return next(createHttpError(404, 'Contact not found'));
-//   }
-
-//   res
-//     .status(200)
-//     .send({ status: 200, message: 'Contact updated', data: result });
-// };
 
 export const updateContactController = async (req, res, next) => {
   const { contactId } = req.params;
