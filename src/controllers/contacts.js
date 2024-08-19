@@ -69,7 +69,7 @@ export const updateContactController = async (req, res, next) => {
   });
 
   if (!result) {
-    next(createHttpError(404, 'Student not found'));
+    next(createHttpError(404, 'Contact not found'));
     return;
   }
 
@@ -78,7 +78,7 @@ export const updateContactController = async (req, res, next) => {
   res.status(status).json({
     status,
     message: `Successfully upserted a student!`,
-    data: result.student,
+    data: result.contact,
   });
 };
 
@@ -94,6 +94,6 @@ export const patchContactController = async (req, res, next) => {
   res.json({
     status: 200,
     message: `Successfully patched a student!`,
-    data: result.student,
+    data: result.contact,
   });
 };
