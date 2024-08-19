@@ -48,13 +48,26 @@ export const createContactController = async (req, res, next) => {
   });
 };
 
+// export const deleteContactController = async (req, res, next) => {
+//   const { contactId } = req.params;
+
+//   const result = deleteContact(contactId);
+
+//   if (result === null) {
+//     return next(createHttpError(404, 'Contact not found'));
+//   }
+
+//   res.status(204).send();
+// };
+
 export const deleteContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const result = deleteContact(contactId);
+  const contact = await deleteContact(contactId);
 
-  if (result === null) {
-    return next(createHttpError(404, 'Contact not found'));
+  if (!contact) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
   }
 
   res.status(204).send();
@@ -90,10 +103,9 @@ export const patchContactController = async (req, res, next) => {
     next(createHttpError(404, 'Contact not found'));
     return;
   }
-
-  res.status(200).send({
+  res.json({
     status: 200,
-    message: 'Successfully patched a contact!',
-    data: result,
+    message: `Successfully patched a student!`,
+    data: result.student,
   });
 };
