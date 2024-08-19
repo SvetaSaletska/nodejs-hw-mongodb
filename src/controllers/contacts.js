@@ -23,7 +23,6 @@ export const getContactByIdController = async (req, res, next) => {
     next(createHttpError(404, 'Contact not found'));
     return;
   }
-
   res.status(200).json({
     status: 200,
     message: `Successfully found contact with id ${contactId}!`,
@@ -52,10 +51,11 @@ export const createContactController = async (req, res, next) => {
 export const deleteContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const result = deleteContact(contactId);
+  const contact = await deleteContact(contactId);
 
-  if (result === null) {
-    return next(createHttpError(404, 'Contact not found'));
+  if (!contact) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
   }
 
   res.status(204).send();
@@ -69,7 +69,7 @@ export const updateContactController = async (req, res, next) => {
   });
 
   if (!result) {
-    next(createHttpError(404, 'Student not found'));
+    next(createHttpError(404, 'Contact not found'));
     return;
   }
 
@@ -77,8 +77,8 @@ export const updateContactController = async (req, res, next) => {
 
   res.status(status).json({
     status,
-    message: `Successfully upserted a student!`,
-    data: result.student,
+    message: `Successfully upserted a contact!`,
+    data: result.contact,
   });
 };
 
@@ -91,10 +91,9 @@ export const patchContactController = async (req, res, next) => {
     next(createHttpError(404, 'Contact not found'));
     return;
   }
-
-  res.status(200).send({
+  res.json({
     status: 200,
-    message: 'Successfully patched a contact!',
+    message: `Successfully patched a contact!`,
     data: result.contact,
   });
 };
