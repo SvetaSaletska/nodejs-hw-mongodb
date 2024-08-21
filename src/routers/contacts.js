@@ -20,31 +20,23 @@ const router = express.Router();
 const jsonParser = express.json();
 
 router.get('/contacts', ctrlWrapper(getAllContactsController));
-router.get(
-  '/contacts/:contactId',
-  isValidId,
-  ctrlWrapper(getContactByIdController),
-);
+router.get('/contacts/:id', isValidId, ctrlWrapper(getContactByIdController));
 router.post(
   '/contacts',
   jsonParser,
   validateBody(createContactsSchema),
   ctrlWrapper(createContactController),
 );
-router.delete(
-  '/contacts/:contactId',
-  isValidId,
-  ctrlWrapper(deleteContactController),
-);
+router.delete('/contacts/:id', isValidId, ctrlWrapper(deleteContactController));
 router.put(
-  '/contacts/:contactId',
+  '/contacts/:id',
   isValidId,
   jsonParser,
   validateBody(createContactsSchema),
   ctrlWrapper(updateContactController),
 );
 router.patch(
-  '/contacts/:contactId',
+  '/contacts/:id',
   isValidId,
   jsonParser,
   validateBody(updateContactsSchema),
