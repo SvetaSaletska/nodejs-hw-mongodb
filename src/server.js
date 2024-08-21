@@ -5,7 +5,8 @@ import cors from 'cors';
 import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
-import router from './routers/contacts.js';
+import generalRouter from './routers/index.js';
+import authRoutes from './routers/auth.js';
 
 dotenv.config();
 
@@ -24,8 +25,8 @@ export const setupServer = () => {
     }),
   );
 
-  app.use(router);
-
+  app.use(generalRouter);
+  app.use(authRoutes);
   app.use(errorHandler);
 
   app.use(notFoundHandler);
