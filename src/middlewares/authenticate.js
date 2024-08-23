@@ -45,7 +45,7 @@ import { UsersCollection } from '../db/models/user.js';
 //   next();
 // };
 
-export async function auth(req, res, next) {
+export async function authenticate(req, res, next) {
   if (typeof req.headers.authorization !== 'string') {
     return next(createHttpError(401, 'Please provide Authorization header'));
   }
