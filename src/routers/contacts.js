@@ -31,6 +31,7 @@ router.get(
 );
 router.post(
   '/contacts',
+  authenticate,
   jsonParser,
   validateBody(createContactsSchema),
   ctrlWrapper(createContactController),
