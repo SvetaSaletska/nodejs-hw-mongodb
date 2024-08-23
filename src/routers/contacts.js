@@ -18,7 +18,7 @@ import { authenticate } from '../middlewares/authenticate.js';
 
 const router = express.Router();
 
-router.use(authenticate);
+// router.use(authenticate);
 
 const jsonParser = express.json();
 
@@ -38,6 +38,7 @@ router.post(
 );
 router.delete(
   '/contacts/:contactId',
+  authenticate,
   isValidId,
   ctrlWrapper(deleteContactController),
 );
