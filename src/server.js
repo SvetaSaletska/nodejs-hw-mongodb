@@ -8,6 +8,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import generalRouter from './routers/index.js';
 import authRoutes from './routers/auth.js';
 import cookieParser from 'cookie-parser';
+import { authenticate } from './middlewares/authenticate.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const PORT = Number(env('PORT', '3000'));
 
 export const setupServer = () => {
   const app = express();
+  app.use(authenticate);
   app.use(cors());
   app.use(cookieParser());
   app.use(

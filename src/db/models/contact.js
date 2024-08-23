@@ -18,6 +18,11 @@ const contactsSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'user',
+    },
     contactType: {
       type: String,
       enum: ['work', 'home', 'personal'],
