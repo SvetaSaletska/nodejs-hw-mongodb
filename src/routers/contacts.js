@@ -14,11 +14,15 @@ import {
 } from '../validation/contacts.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
+import { authenticate } from '../middlewares/authenticate.js';
+
+router.use(authenticate);
 
 const router = express.Router();
 
 const jsonParser = express.json();
 
+// router.get('/', ctrlWrapper(getAllContactsController));
 router.get('/contacts', ctrlWrapper(getAllContactsController));
 router.get(
   '/contacts/:contactId',
@@ -26,7 +30,7 @@ router.get(
   ctrlWrapper(getContactByIdController),
 );
 router.post(
-  '/register',
+  '/contacts',
   jsonParser,
   validateBody(createContactsSchema),
   ctrlWrapper(createContactController),
