@@ -18,8 +18,6 @@ import { authenticate } from '../middlewares/authenticate.js';
 
 const router = express.Router();
 
-// router.use(authenticate);
-
 const jsonParser = express.json();
 
 router.get('/contacts', authenticate, ctrlWrapper(getAllContactsController));
