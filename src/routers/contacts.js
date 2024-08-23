@@ -16,9 +16,9 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
 
-router.use(authenticate);
-
 const router = express.Router();
+
+router.use(authenticate);
 
 const jsonParser = express.json();
 
