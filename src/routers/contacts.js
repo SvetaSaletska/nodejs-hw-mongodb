@@ -19,30 +19,27 @@ import { authenticate } from '../middlewares/authenticate.js';
 const router = express.Router();
 
 const jsonParser = express.json();
+router.use(authenticate);
 
-router.get('/contacts', authenticate, ctrlWrapper(getAllContactsController));
+router.get('/contacts', ctrlWrapper(getAllContactsController));
 router.get(
   '/contacts/:contactId',
-  authenticate,
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
 router.post(
   '/contacts',
-  authenticate,
   jsonParser,
   validateBody(createContactsSchema),
   ctrlWrapper(createContactController),
 );
 router.delete(
   '/contacts/:contactId',
-  authenticate,
   isValidId,
   ctrlWrapper(deleteContactController),
 );
 router.put(
   '/contacts/:contactId',
-  authenticate,
   isValidId,
   jsonParser,
   validateBody(createContactsSchema),
@@ -50,7 +47,6 @@ router.put(
 );
 router.patch(
   '/contacts/:contactId',
-  authenticate,
   isValidId,
   jsonParser,
   validateBody(updateContactsSchema),
