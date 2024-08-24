@@ -1,27 +1,27 @@
-function parseNumber(maybeNumber) {
-  if (typeof maybeNumber !== 'string') {
-    return undefined;
+const parseType = (type) => {
+  const isString = typeof type === 'string';
+  if (!isString) return;
+  const isType = (type) => ['home', 'work', 'personal'].includes(type);
+
+  if (isType(type)) return type;
+};
+
+const parseBoolean = (value) => {
+  if (typeof value === 'string') {
+    return value.toLowerCase() === 'true' || value.toLowerCase() === 'false'
+      ? value.toLowerCase() === 'true'
+      : undefined;
   }
+};
 
-  const parsedNumber = parseInt(maybeNumber);
+export const parseFilterParams = (query) => {
+  const { isFavourite, contactType } = query;
 
-  if (Number.isNaN(parsedNumber)) {
-    return undefined;
-  }
-
-  return parsedNumber;
-}
-
-function parseFilterParams(query) {
-  const { minYear, maxYear } = query;
-
-  const parsedMinYear = parseNumber(minYear);
-  const parsedMaxYear = parseNumber(maxYear);
+  const parsedType = parseType(contactType);
+  const parsedIsFavourite = parseBoolean(isFavourite);
 
   return {
-    minYear: parsedMinYear,
-    maxYear: parsedMaxYear,
+    isFavourite: parsedIsFavourite,
+    contactType: parsedType,
   };
-}
-
-export { parseFilterParams };
+};
