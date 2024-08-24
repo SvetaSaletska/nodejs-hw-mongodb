@@ -17,9 +17,9 @@ import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
 
 const router = express.Router();
+router.use(authenticate);
 
 const jsonParser = express.json();
-router.use(authenticate);
 
 router.get('/contacts', ctrlWrapper(getAllContactsController));
 router.get(
