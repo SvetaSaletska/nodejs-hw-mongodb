@@ -139,7 +139,7 @@ function deleteContact(contactId, userId) {
   return contactsCollection.findOneAndDelete({ _id: contactId, userId });
 }
 
-const patchContact = async (contactId, userId, payload, options) => {
+const updateContact = async (contactId, userId, payload, options) => {
   const rawResult = await contactsCollection.findOneAndUpdate(
     { _id: contactId, userId },
     payload,
@@ -163,5 +163,5 @@ export {
   getContactById,
   createContact,
   deleteContact,
-  patchContact,
+  updateContact,
 };
