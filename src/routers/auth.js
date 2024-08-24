@@ -1,5 +1,5 @@
 import express from 'express';
-import { Router } from 'express';
+// import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { registerUserSchema } from '../validation/auth.js';
 import { registerUserController } from '../controllers/auth.js';
@@ -9,7 +9,7 @@ import { loginUserController } from '../controllers/auth.js';
 import { logoutUserController } from '../controllers/auth.js';
 import { refreshUserSessionController } from '../controllers/auth.js';
 
-const authRoutes = Router();
+const authRoutes = express.Router();
 const jsonParser = express.json();
 
 authRoutes.post(
