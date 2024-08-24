@@ -8,7 +8,6 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import generalRouter from './routers/index.js';
 import authRoutes from './routers/auth.js';
 import cookieParser from 'cookie-parser';
-
 dotenv.config();
 
 const PORT = Number(env('PORT', '3000'));
