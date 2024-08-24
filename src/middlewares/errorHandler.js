@@ -1,6 +1,6 @@
 import { isHttpError } from 'http-errors';
 
-function errorHandler(error, _req, res, _next) {
+function errorHandler(error, _req, res) {
   console.error(error);
 
   if (isHttpError(error) === true) {
