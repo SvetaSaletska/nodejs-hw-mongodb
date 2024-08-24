@@ -15,8 +15,6 @@ import {
 import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
-import { checkRoles } from '../middlewares/checkRoles.js';
-import { ROLES } from '../constants/index.js';
 
 const router = express.Router();
 
@@ -26,7 +24,6 @@ router.get('/contacts', authenticate, ctrlWrapper(getAllContactsController));
 router.get(
   '/contacts/:contactId',
   authenticate,
-  checkRoles(ROLES.AUTOR),
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
@@ -41,7 +38,6 @@ router.delete(
   '/contacts/:contactId',
   authenticate,
   isValidId,
-  checkRoles(ROLES.AUTOR),
   ctrlWrapper(deleteContactController),
 );
 router.put(
@@ -55,7 +51,6 @@ router.put(
 router.patch(
   '/contacts/:contactId',
   authenticate,
-  checkRoles(ROLES.AUTOR),
   isValidId,
   jsonParser,
   validateBody(updateContactsSchema),
