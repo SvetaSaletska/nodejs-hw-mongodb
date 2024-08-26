@@ -25,6 +25,7 @@ export const setupServer = () => {
   );
 
   app.use(generalRouter);
+  // app.use(authRoutes);
   app.use(errorHandler);
 
   app.use(notFoundHandler);
