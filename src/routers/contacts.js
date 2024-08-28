@@ -32,6 +32,12 @@ router.post(
   validateBody(createContactsSchema),
   ctrlWrapper(createContactController),
 );
+
+router.post(
+  '/register',
+  validateBody(createContactsSchema),
+  ctrlWrapper(createContactController),
+);
 router.delete(
   '/contacts/:contactId',
   isValidId,
