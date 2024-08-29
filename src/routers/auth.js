@@ -1,5 +1,4 @@
 import express from 'express';
-// import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { registerUserSchema } from '../validation/auth.js';
 import { registerUserController } from '../controllers/auth.js';
@@ -13,21 +12,21 @@ const authRoutes = express.Router();
 const jsonParser = express.json();
 
 authRoutes.post(
-  '/auth/register',
+  '/register',
   jsonParser,
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
 
 authRoutes.post(
-  '/auth/login',
+  '/login',
   jsonParser,
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
 
-authRoutes.post('/auth/logout', ctrlWrapper(logoutUserController));
+authRoutes.post('/logout', ctrlWrapper(logoutUserController));
 
-authRoutes.post('/auth/refresh', ctrlWrapper(refreshUserSessionController));
+authRoutes.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
 export default authRoutes;
