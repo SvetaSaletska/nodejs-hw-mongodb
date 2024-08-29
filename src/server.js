@@ -6,7 +6,7 @@ import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import generalRouter from './routers/index.js';
-import authRoutes from './routers/auth.js';
+// import authRoutes from './routers/auth.js';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 
@@ -25,7 +25,7 @@ export const setupServer = () => {
   );
 
   app.use(generalRouter);
-  app.use(authRoutes);
+  // app.use(authRoutes);
   app.use(errorHandler);
 
   app.use(notFoundHandler);
