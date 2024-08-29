@@ -23,9 +23,8 @@ export const setupServer = () => {
       },
     }),
   );
-
-  app.use(generalRouter);
   app.use(authRoutes);
+  app.use(generalRouter);
   app.use(errorHandler);
 
   app.use(notFoundHandler);
