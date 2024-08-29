@@ -12,21 +12,21 @@ const authRoutes = express.Router();
 const jsonParser = express.json();
 
 authRoutes.post(
-  '/register',
+  '/auth/register',
   jsonParser,
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
 
 authRoutes.post(
-  '/login',
+  '/auth/login',
   jsonParser,
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
 
-authRoutes.post('/logout', ctrlWrapper(logoutUserController));
+authRoutes.post('/auth/logout', ctrlWrapper(logoutUserController));
 
-authRoutes.post('/refresh', ctrlWrapper(refreshUserSessionController));
+authRoutes.post('/auth/refresh', ctrlWrapper(refreshUserSessionController));
 
 export default authRoutes;
