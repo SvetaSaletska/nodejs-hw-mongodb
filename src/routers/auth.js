@@ -1,12 +1,18 @@
 import express from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { registerUserSchema } from '../validation/auth.js';
-import { registerUserController } from '../controllers/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import { loginUserSchema } from '../validation/auth.js';
-import { loginUserController } from '../controllers/auth.js';
-import { logoutUserController } from '../controllers/auth.js';
-import { refreshUserSessionController } from '../controllers/auth.js';
+import {
+  loginUserSchema,
+  registerUserSchema,
+  requestResetEmailSchema,
+} from '../validation/auth.js';
+import {
+  loginUserController,
+  logoutUserController,
+  registerUserController,
+  refreshUserSessionController,
+  requestResetEmailController,
+} from '../controllers/auth.js';
 
 const authRoutes = express.Router();
 const jsonParser = express.json();
@@ -28,5 +34,12 @@ authRoutes.post(
 authRoutes.post('/auth/logout', ctrlWrapper(logoutUserController));
 
 authRoutes.post('/auth/refresh', ctrlWrapper(refreshUserSessionController));
+
+authRoutes.post(
+  '/auth/send-reset-email',
+  jsonParser,
+  validateBody(requestResetEmailSchema),
+  ctrlWrapper(requestResetEmailController),
+);
 
 export default authRoutes;
