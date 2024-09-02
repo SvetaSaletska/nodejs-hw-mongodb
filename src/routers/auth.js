@@ -46,6 +46,7 @@ authRoutes.post(
 
 authRoutes.post(
   '/auth/reset-pwd',
+  jsonParser,
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );
