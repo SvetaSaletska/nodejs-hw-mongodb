@@ -8,7 +8,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import generalRouter from './routers/index.js';
 import authRoutes from './routers/auth.js';
 import cookieParser from 'cookie-parser';
-import { UPLOAD_DIR } from './constants/index.js';
+// import { UPLOAD_DIR } from './constants/index.js';
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ export const setupServer = () => {
   const app = express();
   app.use(cors());
   app.use(cookieParser());
-  app.use('/uploads', express.static(UPLOAD_DIR));
+  // app.use('/uploads', express.static(UPLOAD_DIR));
   app.use(
     pino({
       transport: {
