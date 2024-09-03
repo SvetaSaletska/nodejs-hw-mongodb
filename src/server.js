@@ -17,6 +17,7 @@ const PORT = Number(env('PORT', '3000'));
 export const setupServer = () => {
   const app = express();
   app.use(cors());
+  app.use('/uploads', express.static(UPLOAD_DIR));
   app.use(cookieParser());
   app.use(
     pino({
@@ -25,7 +26,6 @@ export const setupServer = () => {
       },
     }),
   );
-  app.use('/uploads', express.static(UPLOAD_DIR));
   app.use(authRoutes);
   app.use(generalRouter);
   app.use(errorHandler);
