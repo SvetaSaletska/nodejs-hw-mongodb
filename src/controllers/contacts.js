@@ -107,8 +107,8 @@ export const updateContactController = async (req, res, next) => {
 };
 
 export const patchContactController = async (req, res, next) => {
-  const { contactId } = req.params;
   const userId = req.user._id;
+  const { contactId } = req.params;
   const photo = req.file;
 
   let photoUrl;
