@@ -58,6 +58,7 @@ authRoutes.get('/get-oauth-url', ctrlWrapper(getGoogleOAuthUrlController));
 
 authRoutes.post(
   '/confirm-oauth',
+  jsonParser,
   validateBody(loginWithGoogleOAuthSchema),
   ctrlWrapper(loginWithGoogleController),
 );
