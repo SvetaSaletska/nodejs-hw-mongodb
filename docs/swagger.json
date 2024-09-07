@@ -194,13 +194,9 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "userId",
                   "name",
                   "phoneNumber",
-                  "email",
-                  "isFavourite",
-                  "contactType",
-                  "photo"
+                  "contactType"
                 ],
                 "properties": {
                   "name": {
@@ -231,11 +227,6 @@
                       "work",
                       "personal"
                     ]
-                  },
-                  "userId": {
-                    "description": "User id",
-                    "type": "string",
-                    "example": "66d7703b678b24a10d51de87"
                   },
                   "photo": {
                     "description": "Contact photo",
@@ -403,11 +394,6 @@
                       "work",
                       "personal"
                     ]
-                  },
-                  "userId": {
-                    "description": "User id",
-                    "type": "string",
-                    "example": "66d7703b678b24a10d51de87"
                   },
                   "photo": {
                     "description": "Contact photo",
